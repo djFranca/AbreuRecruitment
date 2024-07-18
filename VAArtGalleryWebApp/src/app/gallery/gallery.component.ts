@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Gallery } from './models';
 import { GalleryService } from './gallery.service';
-
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +15,7 @@ export class GalleryComponent implements OnInit {
   displayedColumns: string[] = ['name', 'city', 'manager', 'nbrWorks', 'actions'];
   tableHeaderColor: string = "";
 
-  constructor(private galleryService: GalleryService) { }
+  constructor(private galleryService: GalleryService, private router: Router) { }
 
   ngOnInit(): void {
     console.log('cenas');
@@ -28,6 +28,9 @@ export class GalleryComponent implements OnInit {
   }
 
   openArtWorksList(galleryId: string) {
+
     console.log(galleryId);
+
+    this.router.navigate(['/art-works'], {queryParams: {id: galleryId}});
   }
 }
