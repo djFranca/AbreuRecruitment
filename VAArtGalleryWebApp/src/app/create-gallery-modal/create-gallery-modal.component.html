@@ -1,0 +1,35 @@
+<h2 mat-dialog-title><b>{{title}}</b></h2>
+<hr/>
+<mat-dialog-content>
+    <section>
+        <form [formGroup]="form" (ngSubmit)="createGallery()">
+             <div class="form-field">
+                <label for="name">
+                  <b>Nome</b>
+                </label>
+                <input id="name" type="text" size="50" formControlName="name" maxlength="100" required placeholder="Insira o nome da galeria">
+                <span *ngIf="nameInvalid" class="alert-danger">O nome da galeria é obrigatório!</span>
+              </div>
+            
+              <div class="form-field">
+                <label for="city">
+                  <b>Cidade</b>
+                </label>
+                <input id="city" type="text" size="50" formControlName="city" maxlength="100" required placeholder="Insira a localização">              
+                <span *ngIf="cityInvalid" class="alert-danger">O nome da cidade é obrigatório!</span>
+              </div>
+    
+              <div class="form-field">
+                <label for="manager">
+                  <b>Gestor</b>
+                </label>
+                <input id="manager" type="text" size="50" formControlName="manager" maxlength="100" required placeholder="Insira o nome do gestor">
+                <span *ngIf="managerInvalid" class="alert-danger">O nome do gestor é obrigatório!</span>
+              </div>
+              <div class="actions">
+                <button class="button" type="submit">Guardar</button>
+                <button mat-button mat-dialog-close>Fechar</button>
+              </div>
+        </form>
+    </section>
+</mat-dialog-content>

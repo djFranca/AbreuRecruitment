@@ -7,10 +7,15 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class WorkService {
-  private baseUrl = 'https://localhost:7042/api/art-works'
+  private baseUrl = 'https://localhost:7042/api/art-works';
+
   constructor(private http: HttpClient) { }
 
   getWorks(id: string): Observable<Work[]> {
     return this.http.get<Work[]>(`${this.baseUrl}`, {params: {artGalleryId: id}});
+  }
+
+  deleteWork(id: string): Observable<boolean> {
+    return this.http.delete<boolean>(`${this.baseUrl}`, {params: {artWorkId: id}});
   }
 }

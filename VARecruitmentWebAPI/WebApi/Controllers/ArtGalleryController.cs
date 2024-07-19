@@ -22,7 +22,23 @@ namespace VAArtGalleryWebAPI.WebApi.Controllers
         [HttpPost]
         public async Task<ActionResult<CreateArtGalleryResult>> Create([FromBody] CreateArtGalleryRequest request)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, "Alguém vai ter de o implementar :)");
+            try
+            {
+                var gallery = await mediator.Send(new CreateArtGalleryQuery(request));
+
+                if (gallery is null)
+                {
+                    return NotFound();
+                }
+
+                var result = new CreateArtGalleryResult(gallery.Id, gallery.Name, gallery.City, gallery.Manager);
+
+                return Ok(result);
+            }
+            catch (ArgumentException ex) when (request is null)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

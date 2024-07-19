@@ -1,0 +1,24 @@
+h2 {
+    text-align: center;
+    text-justify: auto;
+    background-color: blue;
+}
+
+.form-field {
+    margin-left: 4.5rem;
+    padding-top: 2rem;
+}
+
+.actions {
+    padding-top: 8rem;
+    padding-left: 20rem;
+}
+
+input, label {
+    display: block;
+}
+
+.alert-danger {
+    text-decoration: solid;
+    color: red;
+}

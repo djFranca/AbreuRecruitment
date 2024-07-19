@@ -25,11 +25,28 @@ namespace VAArtGalleryWebAPI.WebApi.Controllers
 
                 return Ok(result);
             }
-            catch (ArgumentNullException ex)
+            catch (ArgumentNullException ex) when (artGalleryId is null)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (FormatException ex) when (Guid.TryParse(artGalleryId, out Guid result) is false)
             {
                 return BadRequest(ex.Message);
             }
-            catch (FormatException ex)
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult<DeleteArtGalleryArtWorkResult>> DeleteArtWorkFromGallery([FromQuery] string artWorkId)
+        {
+            try
+            {
+                var success = await mediator.Send(new DeleteArtGalleryArtWorkQuery(Guid.Parse(artWorkId)));
+
+                var result = new DeleteArtGalleryArtWorkResult(success);
+
+                return Ok(result);
+            }
+            catch(FormatException ex) when (Guid.TryParse(artWorkId, out _) is false)
             {
                 return BadRequest(ex.Message);
             }

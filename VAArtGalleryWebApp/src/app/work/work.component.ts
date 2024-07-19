@@ -24,12 +24,25 @@ export class WorkComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("Art gallery id: " + this.artGalleryId);
-    this.workService.getWorks(this.artGalleryId).subscribe(works => {this.works = works; console.log(this.works);});
+    this.getWorks();
     this.tableHeaderColor = "blue";
   }
 
-  editWorkClick(workId: string){
+  getWorks(){
+    this.workService.getWorks(this.artGalleryId).subscribe(works => {this.works = works; console.log(this.works);});
+  }
+
+  deleteWorkClick(workId: string){
     console.log(workId);
+
+    this.workService.deleteWork(workId).subscribe((result) =>{
+      if(result){
+        this.getWorks();
+      }
+      else{
+        this.router.navigate(['art-work']);
+      }
+    });
   }
 
   goToGalleries(){

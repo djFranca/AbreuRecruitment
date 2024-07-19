@@ -39,3 +39,9 @@
     <tr mat-row *matRowDef="let row; let even = even; let odd = odd; columns: displayedColumns;" [class.row-light-grey]="even" [class.row-dark-grey]="odd"></tr>
   </table>
 </div>
+
+<footer>
+  <div class="container">
+      <button (click)="openCreateGalleryModal()">Criar Galeria</button>
+  </div>
+</footer>
